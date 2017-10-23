@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     String[] Price = new String[]{"¥ 5.00", "¥ 59.00", "¥ 79.00", "¥ 2399.00", "¥ 179.00", "¥ 14.90", "¥ 132.59", "¥ 141.43", "¥ 139.43", "¥ 28.90"};
     String[] Type = new String[]{"作者", "产地", "产地", "版本", "重量", "产地", "重量", "重量", "重量", "重量"};
     String[] Info = new String[]{"Johanna Basford", "德国", "澳大利亚", "8GB", "2Kg", "英国", "300g", "118g", "249g", "640g"};
+
     final ArrayList<String> Itemlist = new ArrayList<>();
     final ArrayList<Pair<String,String>> data = new ArrayList<>();
     final ArrayList<Pair<Pair<String,String>,String>> details = new ArrayList<>();
@@ -63,39 +64,9 @@ public class MainActivity extends AppCompatActivity {
         initshoplist();
         initshoplistview();
         //初始化购物车
-        //initshopcar();
-        final ListView shopcar = (ListView)findViewById(R.id.shopcar);
-        shopcar.setVisibility(View.INVISIBLE);
-
-        mShopcarAdapter = new ShopcarAdapter(MainActivity.this,sc_product);
-        shopcar.setAdapter(mShopcarAdapter);
-        AdapterView.OnItemClickListener shopcarlistener = new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String shopcaritem = sc_product.get(position).first.second;
-                int i = Itemlist.indexOf(shopcaritem);
-                Intent intent = new Intent(MainActivity.this,Showproduct.class);
-                intent.putExtra("item",shopcaritem);
-                intent.putExtra("Price",sc_product.get(position).second);
-                intent.putExtra("Type",details.get(i).first.second);
-                intent.putExtra("Info",details.get(i).second);
-                intent.putExtra("letter",sc_product.get(position).first.first);
-                startActivityForResult(intent, 0);
-            }
-
-        };
-        AdapterView.OnItemLongClickListener deletepro = new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                initDialog(data.get(position).second,position);
-                return true;
-            }
-        };
-        shopcar.setOnItemClickListener(shopcarlistener);
-        shopcar.setOnItemLongClickListener(deletepro);
-
+        initshopcar();
+        //定义两个界面之间的相互转换
         twoviewchange();
-
 
     }
 
@@ -114,10 +85,9 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("letter",data.get(position).first);
                 startActivityForResult(intent, 0);
             }
-
             @Override
             public void onLongClick(int position) {
-//                initDialog(data.get(position).second,position);
+                Toast.makeText(getApplicationContext(), "移除第"+(position+1)+"个商品", Toast.LENGTH_SHORT).show();
                 data.remove(position);
                 details.remove(position);
                 shoplistadapter.notifyDataSetChanged();
@@ -143,9 +113,8 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.setPositiveButton("确定",new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                data.remove(position);
-                details.remove(position);
-                shoplistadapter.notifyDataSetChanged();
+                sc_product.remove(position);
+                mShopcarAdapter.notifyDataSetChanged();
             }});
         alertDialog.setMessage("从购物车中移除"+name+"?");
         alertDialog.create();
@@ -175,6 +144,40 @@ public class MainActivity extends AppCompatActivity {
         };
         changetocar.setOnClickListener(toshopcar);
     }
+
+    private void initshopcar(){
+        final ListView shopcar = (ListView)findViewById(R.id.shopcar);
+        shopcar.setVisibility(View.INVISIBLE);
+        mShopcarAdapter = new ShopcarAdapter(MainActivity.this,sc_product);
+        shopcar.setAdapter(mShopcarAdapter);
+        AdapterView.OnItemClickListener shopcarlistener = new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(position != 0 ){
+                    String shopcaritem = sc_product.get(position).first.second;
+                    int i = Itemlist.indexOf(shopcaritem);
+                    Intent intent = new Intent(MainActivity.this,Showproduct.class);
+                    intent.putExtra("item",shopcaritem);
+                    intent.putExtra("Price",sc_product.get(position).second);
+                    intent.putExtra("Type",details.get(i).first.second);
+                    intent.putExtra("Info",details.get(i).second);
+                    intent.putExtra("letter",sc_product.get(position).first.first);
+                    startActivityForResult(intent, 0);
+                }
+            }
+
+        };
+        AdapterView.OnItemLongClickListener deletepro = new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                if(position != 0 ) initDialog(sc_product.get(position).first.second,position);
+                return true;
+            }
+        };
+        shopcar.setOnItemClickListener(shopcarlistener);
+        shopcar.setOnItemLongClickListener(deletepro);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if(resultCode == 0 && requestCode == 0){
@@ -187,6 +190,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         super.onActivityResult(requestCode, resultCode, intent);
-
     }
 }

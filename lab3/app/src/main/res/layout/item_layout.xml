@@ -22,5 +22,4 @@
         android:id="@+id/item_name"
         android:gravity="center"
         />
-
 </LinearLayout>

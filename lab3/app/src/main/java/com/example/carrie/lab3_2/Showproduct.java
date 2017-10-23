@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -27,7 +28,6 @@ public class Showproduct extends AppCompatActivity {
         ListView listtv = (ListView)findViewById(R.id.ltv);
         ArrayAdapter<String> adapter =  new ArrayAdapter<String>(this,R.layout.bottom_choose,Bottomch);
         listtv.setAdapter(adapter);
-
 
         Intent intent = getIntent();
         final String item = intent.getStringExtra("item");
@@ -52,7 +52,6 @@ public class Showproduct extends AppCompatActivity {
                     setResult(0,shopcarintent);
                     finish();
                 }
-
             }
         };
         back.setOnClickListener(backlast);
@@ -75,10 +74,10 @@ public class Showproduct extends AppCompatActivity {
         star.setOnClickListener(starlast);
 
         ImageView shopcaradd = (ImageView)findViewById(R.id.shoplist_add);
-        final Bundle details = new Bundle();
         View.OnClickListener shopcarclick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "商品已添加到购物车", Toast.LENGTH_SHORT).show();
                 if(flag[0] == 0){
                     flag[0] = 1;
                 }

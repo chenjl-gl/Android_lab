@@ -29,11 +29,6 @@ public class shoplistAdapter extends RecyclerView.Adapter<shoplistAdapter.ViewHo
         this.Data = data;
     }
 
-    public void updateData(ArrayList<Pair<String,String>> data) {
-        this.Data = data;
-        notifyDataSetChanged();
-    }
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ViewHolder holder;
@@ -71,18 +66,14 @@ public class shoplistAdapter extends RecyclerView.Adapter<shoplistAdapter.ViewHo
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-
         TextView letter;
         TextView item;
-
         public ViewHolder(View itemView) {
             super(itemView);
             letter = (TextView) itemView.findViewById(R.id.first_letter);
             item = (TextView) itemView.findViewById(R.id.item_name);
         }
     }
-
-
 }
 
 

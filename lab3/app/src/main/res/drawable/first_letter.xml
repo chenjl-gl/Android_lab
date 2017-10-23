@@ -4,5 +4,4 @@
     <size andriod:height="50dp"
         andriod:width="50dp"/>
     <solid andriod:color="#3F51B5"/>
-
 </shape>
