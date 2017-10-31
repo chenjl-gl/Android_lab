@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:andriod="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/tools">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/linearLayout">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/shoppinglist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/linearLayout2">
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/shopcar"
+            >
+
+        </ListView>
+    </LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+    android:id="@+id/floatingActionButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignBottom="@+id/linearLayout"
+    android:layout_alignRight="@+id/linearLayout"
+    android:layout_marginBottom="31dp"
+    android:layout_marginEnd="30dp"
+    android:layout_marginRight="30dp"
+    android:backgroundTint="#FFFFFF"
+    android:clickable="true"
+    andriod:backgroundTint="@android:color/background_light"
+    andriod:srcCompat="@mipmap/shoplist"
+    app:borderWidth="0dp"
+    app:rippleColor="#FFFFFF" />
+</RelativeLayout>

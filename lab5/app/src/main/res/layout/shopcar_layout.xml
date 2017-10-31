@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/shopcar_letter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/first_letter"
+        android:gravity="center"/>
+    <TextView
+
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        android:layout_marginLeft="10dp"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
+        android:id="@+id/shopcar_item"
+        android:gravity="center"
+        android:textAlignment="center"
+        />
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:id="@+id/shopcar_price"
+            android:textAlignment="center"
+
+             />
+
+
+</LinearLayout>
